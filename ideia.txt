@@ -1,0 +1,23 @@
+Extrair: WebScrapping
+  GOL:Herança
+  LATAM:Herança
+  AZUL:Herança
+Processar: Limpeza e Inserção no banco de dados.
+  Limpeza
+    Padronizar(formatação)
+    Remover certos dados
+  Banco de dados
+    Criar
+    Fazer a conexão
+    Inserir
+    Consultas 
+Analisar: Aplicação dos modelos
+  Modelo: Herança
+  ***Após a aplicação do modelo, o que fazer com os dados?
+  ***Criar um outro banco de dados
+  ***Criar uma estrutura(JSON) e dar um output direto 
+Compartilhar: Output com relatórios e gráficos
+  ***Supondo JSON como output da análise, então
+  ***Interpretação do JSON e reorganização para criação do relatório
+  ***Leitura
+  ***Criação
