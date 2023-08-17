@@ -1,54 +1,72 @@
 class Extrair:
-    def scrape() -> str:
+    def scrape(self):
         """Retira os dados"""
         pass
 
 
+class ExGOL(Extrair):
+    def scrape(self):
+        """Retira os dados no contexto da GOL"""
+        pass
+
+
+class ExLATAM(Extrair):
+    def scrape(self):
+        """Retira os dados no contexto da LATAM"""
+        pass
+
+
+class ExAZUL(Extrair):
+    def scrape(self):
+        """Retira os dados no contexto da AZUL"""
+        pass
+
+
 class Processar:
-    def limpa() -> str:
+    def limpa(self):
         """Limpa os dados"""
         pass
 
-    def insere() -> str:
+    def insere(self):
         """Conecta com o BD e insere os dados"""
         pass
 
 
 class BD:
-    def cria(bdNome) -> str:
+    def cria(self, fbdNome):
         """Cria um banco de dados com nome bdNome """
         pass
 
-    def conecta(bdNome) -> str:
+    def conecta(self, bdNome):
         """Realiza a conexão com o bd"""
         pass
 
-    def insere(bdNome) -> str:
+    def insere(self, bdNome):
         """Insere o dado fornecido"""
         pass
 
-    def consulta(consulta, bdNome) -> str:
+    def consulta(self, consulta, bdNome):
         """Realiza a consulta fornecida no bd"""
         pass
 
 
 class Analisar:
 
-    def Modelo() -> str:
+    def Modelo(self):
         """Aplica o modelo implementado"""
         pass
 
 
 class Compartilhar:
 
-    def le() -> str:
+    def le(self):
         """Receber os dados da analise"""
         pass
 
-    def criaGrafico(parametros) -> str:
+    def criaGrafico(self, parametros):
         """"Cria um gráfico dados os parametros"""
         pass
 
-    def outputRelatorio() -> str:
+    def outputRelatoriop(self):
         """"Gera o relatório no formato desejado"""
         pass
