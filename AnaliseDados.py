@@ -4,24 +4,6 @@ class Extrair:
         pass
 
 
-class ExGOL(Extrair):
-    def scrape(self):
-        """Retira os dados no contexto da GOL"""
-        pass
-
-
-class ExLATAM(Extrair):
-    def scrape(self):
-        """Retira os dados no contexto da LATAM"""
-        pass
-
-
-class ExAZUL(Extrair):
-    def scrape(self):
-        """Retira os dados no contexto da AZUL"""
-        pass
-
-
 class Processar:
     def limpa(self):
         """Limpa os dados"""
@@ -70,3 +52,7 @@ class Compartilhar:
     def outputRelatoriop(self):
         """"Gera o relatório no formato desejado"""
         pass
+
+
+if __name__ == '__main__':
+    print("Olá mundo")
