@@ -4,34 +4,6 @@ class Extrair:
         pass
 
 
-class Processar:
-    def limpa(self):
-        """Limpa os dados"""
-        pass
-
-    def insere(self):
-        """Conecta com o BD e insere os dados"""
-        pass
-
-
-class BD:
-    def cria(self, fbdNome):
-        """Cria um banco de dados com nome bdNome """
-        pass
-
-    def conecta(self, bdNome):
-        """Realiza a conexão com o bd"""
-        pass
-
-    def insere(self, bdNome):
-        """Insere o dado fornecido"""
-        pass
-
-    def consulta(self, consulta, bdNome):
-        """Realiza a consulta fornecida no bd"""
-        pass
-
-
 class Analisar:
 
     def Modelo(self):
