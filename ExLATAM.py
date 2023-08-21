@@ -45,18 +45,8 @@ siglas = [
     "BSB"
 ]
 
-timeGap = 1
+timeGap = 0.5
 timeWait = 10
-
-row = {
-    "origin": "empty",
-    "destination": "empty",
-    "departureDt": "empty",
-    "arrivalDt": "empty",
-    "value": []
-}
-
-data = []
 
 
 class ExLATAM(Extrair):
@@ -149,46 +139,47 @@ class ExLATAM(Extrair):
         parent = source.find('ol')
         childs = parent.find_all(
             'li', class_='body-flightsstyle__ListItemAvailableFlights-sc__sc-1p74not-5 ixybDA')
+        value = []
         for child in childs:
             span = child.find('span')
             h = re.search("(([0-1]?[0-9]|2[0-3]):[0-5][0-9])", span.text)
             p = re.search("(\d*\.\d+\,\d{1,2})|(\d+,\d{1,2})", span.text)
-            row["value"].append([h.group(), p.group()])
+            value.append([h.group(), p.group()])
+        return value
 
     def scrape(self):
         """Retira os dados no contexto da LATAM"""
+        data = []
         for i, origem in enumerate(estados):
             for j, destino in enumerate(estados):
                 if origem != destino:
                     self.restart()
+                    row = {}
                     row["origin"] = siglas[i]
                     row["destination"] = siglas[j]
-                    row["departureDt"] = "26/08/2023"
-                    row["arrivalDt"] = "27/08/2023"
                     try:
                         self.getUrl(estados[i], estados[j])
                     except:
                         print(
                             f" [-] Erro em getUrl: {estados[i]} e {estados[j]}")
-                        break
                     try:
                         self.getPageSource()
                     except:
                         print(
                             f" [-] Erro em getPageSource: {estados[i]} e {estados[j]}")
-                        break
                     try:
-                        self.getData()
+                        row['value'] = self.getData()
                     except:
                         print(
                             f" [-] Erro em getData: {estados[i]} e {estados[j]}")
-                        break
+                        row['value'] = []
                     print(row)
                     data.append(row)
                     time.sleep(timeGap)
-
+        # print("--------------")
+        # print(data)
         df = json.dumps(data)
-        f = open("LATAM.json", "a")
+        f = open("LATAM.json", "w")
         f.write(df)
         f.close()
 
