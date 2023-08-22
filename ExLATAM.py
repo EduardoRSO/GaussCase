@@ -52,14 +52,14 @@ timeWait = 10
 class ExLATAM(Extrair):
     def __init__(self):
         options = webdriver.ChromeOptions()
-        # options.add_experimental_option("detach", True)
-        # options.add_argument("--headless=new")
         self.driver = webdriver.Chrome(options=options)
 
+# Reinicia o driver para que os passos sejam iguais todas as vezes, porque a mensagem de cookies só aparece uma única vez ao abrir um driver e sempre que uma busca era feita, uma nova aba era criada. Essa decsão reduziu o meu trabalho.
     def restart(self):
         self.driver.close()
         self.__init__()
 
+# Descreve os passos para remover o popup dos cookies
     def avoidCookiePopUp(self):
         time.sleep(timeGap)
         element = self.driver.find_element(
@@ -67,6 +67,7 @@ class ExLATAM(Extrair):
         element.click()
         time.sleep(timeGap)
 
+# Descreve os passos para realizar uma busca e troca de tab no navegador
     def getUrl(self, origem, destino):
         self.driver.get("https://www.latamairlines.com/br/pt")
 
@@ -130,10 +131,12 @@ class ExLATAM(Extrair):
                 self.driver.switch_to.window(window)
                 break
 
+# Espera a página carregar por timeWait segundos. Essa é uma variável global
     def getPageSource(self):
         WebDriverWait(self.driver, timeWait).until(
             EC.presence_of_element_located((By.ID, "WrapperCardFlight0")))
 
+# Dada uma página com horários e valores, extrai todos os dados que estamos interessados e os limpa usando expressões regulares
     def getData(self):
         source = bs(self.driver.page_source, "html.parser")
         parent = source.find('ol')
@@ -147,6 +150,7 @@ class ExLATAM(Extrair):
             value.append([h.group(), p.group()])
         return value
 
+# Faz a chamada dos métodos com try-catchs e armazena os dados em arquivos .json. Note que essa função faz esse processo de 15*14 vezes.
     def scrape(self):
         """Retira os dados no contexto da LATAM"""
         data = []
